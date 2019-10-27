@@ -71,11 +71,17 @@ public class SimonSays extends KeyAdapter {
 		//speak("Correct");
 		// 19. If the keyCode doesn't match the imageIndex and "Simon didn't
 		// say..."
-		if(e.getKeyCode() != imageIndex && bob==false) {
+		else if(e.getKeyCode() != imageIndex && bob==false) {
+			points = points+1;
+			speak("correct");
+			
+			showImage();
+		}
+		else {
 			points = points-1;
 			speak("wrong");
-			
 		}
+		bob = random.nextBoolean();
 		// 20. Increase the value of score
 
 		// 21. Use the speak method to tell the user they were correct
@@ -86,7 +92,7 @@ public class SimonSays extends KeyAdapter {
 		if(tries>9) {
 			JOptionPane.showMessageDialog(null, "Your score is " + points);
 			frame.dispose();
-			
+			showImage();
 			return;
 			
 		}
@@ -123,10 +129,12 @@ public class SimonSays extends KeyAdapter {
 		// "Simon says press this key" or "Press this key"
 		 if(bob == true) {
 			 speak("Simon says press this key");
+			 
 		 }
 		 else {
 			 speak("Press this key");
 		 }
+		 
 		// 14. Above, set the value of simonSays to true/false appropriately
 
 	}
