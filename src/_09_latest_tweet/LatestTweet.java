@@ -1,5 +1,8 @@
 package _09_latest_tweet;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,16 +17,26 @@ import twitter4j.auth.AccessToken;
 
 
 
-public class LatestTweet {
+public class LatestTweet implements ActionListener {
 
 	JFrame frame = new JFrame("The Amazing Tweet Retriever");
 	JPanel panel = new JPanel();
 	JButton search = new JButton();
-	JTextField tweet = new JTextField();
+	JTextField tweet = new JTextField(15);
 	
 	public void run() {
+		frame.setVisible(true);
 		
+		panel.add(tweet);
+		panel.add(search);
 		
+		search.addActionListener(this);
+		
+		search.setText("Search the Twitterverse");
+		
+		frame.add(panel);
+		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	private String getLatestTweet(String searchingFor) {
@@ -45,5 +58,17 @@ public class LatestTweet {
 	        System.err.print(e.getMessage());
 	        return "What the heck is that?";
 	    }
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+		String text = tweet.getText();
+		
+		if(e.getSource() == search) {
+			System.out.println(getLatestTweet(text));
+			
+		}
 	}
 }
